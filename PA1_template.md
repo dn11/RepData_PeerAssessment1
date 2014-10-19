@@ -84,7 +84,7 @@ The mean is 1.0766189\times 10^{4} and the median is 1.0765\times 10^{4}.
 
 ## What is the average daily activity pattern?
 
-We find the number steps for each 5-minute interval (i.e., averaged) across all
+We find the number steps for each 5-minute interval (i.e., averaged across all
 days at each distinct interval) with the following R code:
 
 
@@ -100,6 +100,8 @@ numberOfStepsByInterval<-rowSums(data_intervalByDate,na.rm=TRUE)
 distinctIntervals<-unique(sprintf("%04d", DT$interval))
 ```
 
+We then plot the time series of the mean number of steps by 5-minute interval as: 
+
 
 ```r
 # make a time series plot of the 5-minute 
@@ -111,25 +113,37 @@ plot(unique(strptime(sprintf("%04d", DT$interval),"%H%M")),meanStepsByInterval,
 
 ![](./PA1_template_files/figure-html/unnamed-chunk-6-1.png) 
 
+# <Which 5-minute interval, on average across all days in the dataset, contains
+# the maximum number of steps>
+
 We then determine which 5-minute interval - on average across all the days in the
-dataset - cantains the maximum number of steps in R as follows:
+dataset - contains the maximum number of steps in R as follows:
 
 
 ```r
 # find the 5-minute interval with the highest mean number of steps
 maxInterval<-distinctIntervals[which.max(meanStepsByInterval)]
 maxStepsByInterval<-round(meanStepsByInterval[which.max(meanStepsByInterval)])
+
+maxInterval
 ```
 
-<The maxInterval is has the highest mean number of steps, >
+```
+## [1] "0835"
+```
 
-# <Which 5-minute interval, on average across all days in the dataset, contains
-# the maximum number of steps>
+```r
+maxStepsByInterval
+```
 
+```
+## [1] 206
+```
 
+The interval 0835 is has the highest mean number of steps, 206
 
 ## Imputing missing values
-Missing values introduces bias into some calculations or summaries of the data
+Missing values introduce bias into some calculations or summaries of the data.
 
 The number of missing values is determined in R as follows:
 
@@ -137,8 +151,13 @@ The number of missing values is determined in R as follows:
 ```r
 # (1) Total number of missing values in the dataset
 numberOfNAs<-sum(is.na(DT$steps))
+
+numberOfNAs
 ```
 
+```
+## [1] 2304
+```
 
 We compute the mean over all days by distinct 5-minute interval and use these 
 values to fill missing values as follows:
@@ -180,7 +199,7 @@ hist(numberOfStepsByDate_NAsFilled,breaks=15,col="blue",xlab="Total Number of St
 
 ![](./PA1_template_files/figure-html/unnamed-chunk-11-1.png) 
 
-We can also compute the mean and mode and compare them with the original values
+We can also compute the mean and median and compare them with the original values
 where we ignored NAs computed above:
 
 
@@ -188,13 +207,45 @@ where we ignored NAs computed above:
 # -mean and median total number of steps taken per day
 meanNumberOfSteps_NAsFilled<-mean(numberOfStepsByDate_NAsFilled)
 medianNumberOfSteps_NAsFilled<-median(numberOfStepsByDate_NAsFilled)
+
+meanNumberOfSteps_NAsFilled
+```
+
+```
+## [1] 10766.19
+```
+
+```r
+medianNumberOfSteps_NAsFilled
+```
+
+```
+## [1] 10766.19
+```
+
+Compare these with our original values:
+
+
+```r
+meanNumberOfSteps
+```
+
+```
+## [1] 10766.19
+```
+
+```r
+medianNumberOfSteps
+```
+
+```
+## [1] 10765
 ```
 
 While the mean does not change, the median does.
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
-The 
 
 ```r
 meanStepsByInterval_NAsFilled<-rowMeans(data_intervalByDateNAsFilled,na.rm=FALSE)
@@ -234,4 +285,6 @@ library(lattice)
 xyplot(steps ~ interval | weekendFlag ,data=DT,xlab="datetime",ylab="steps",layout=c(1,2))
 ```
 
-![](./PA1_template_files/figure-html/unnamed-chunk-15-1.png) 
+![](./PA1_template_files/figure-html/unnamed-chunk-16-1.png) 
+
+We can see that there is a clear difference between the activity on weekends and weekdays.
