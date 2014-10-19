@@ -113,9 +113,6 @@ plot(unique(strptime(sprintf("%04d", DT$interval),"%H%M")),meanStepsByInterval,
 
 ![](./PA1_template_files/figure-html/unnamed-chunk-6-1.png) 
 
-# <Which 5-minute interval, on average across all days in the dataset, contains
-# the maximum number of steps>
-
 We then determine which 5-minute interval - on average across all the days in the
 dataset - contains the maximum number of steps in R as follows:
 
