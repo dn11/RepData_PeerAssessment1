@@ -179,7 +179,7 @@ meanNumberOfSteps_NAsFilled</code></pre>
 <div id="are-there-differences-in-activity-patterns-between-weekdays-and-weekends" class="section level2">
 <h2>Are there differences in activity patterns between weekdays and weekends?</h2>
 <pre class="r"><code>meanStepsByInterval_NAsFilled&lt;-rowMeans(data_intervalByDateNAsFilled,na.rm=FALSE)</code></pre>
-<p>We might expect that activity during the weekends differs that of weekdays. To check this we create a new factor in the dataset with two levels - “weekday” and “weekend”:</p>
+<p>We might expect that activity during the weekends differs from that of weekdays. To check this we create a new factor in the dataset with two levels - “weekday” and “weekend”:</p>
 <pre class="r"><code># determine the weekday
 weekday&lt;-weekdays(DT$date)
 # determine weekday numbers

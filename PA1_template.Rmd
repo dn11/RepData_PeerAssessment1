@@ -192,8 +192,8 @@ While the mean does not change, the median does.
 meanStepsByInterval_NAsFilled<-rowMeans(data_intervalByDateNAsFilled,na.rm=FALSE)
 ```
 
-We might expect that activity during the weekends differs that of weekdays. To
-check this we create a new factor in the dataset with two levels - "weekday"
+We might expect that activity during the weekends differs from that of weekdays. 
+To check this we create a new factor in the dataset with two levels - "weekday"
 and "weekend":
 
 ```{r, echo=TRUE}
